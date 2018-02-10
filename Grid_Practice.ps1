@@ -1,4 +1,8 @@
-﻿set-executionpolicy remotesigned
+﻿Set-ExecutionPolicy -ExecutionPolicy Bypass
+
+$file = (get-item "C:\Users\username\Pictures\earth.jpg")
+
+$img = [System.Drawing.Image]::Fromfile($file);
 
 Add-Type -AssemblyName System.Windows.Forms
 $form = New-Object Windows.Forms.Form
@@ -40,7 +44,13 @@ $known_button_decode.add_click({
 })
 $form.Controls.Add($known_button_decode) 
 
+$pictureBox = new-object Windows.Forms.PictureBox
+$pictureBox.Location = New-Object System.Drawing.Size(300,210)
+$pictureBox.Size =   New-Object System.Drawing.Size(270, 150)
+$pictureBox.SizeMode = "StretchImage"
 
+$pictureBox.Image = $img;
+$form.controls.add($pictureBox)
 
 
 
